@@ -90,27 +90,30 @@
     CGPoint currentTouchPosition = [touch locationInView:self.photoCollectView];
     NSIndexPath *indexPath = [self.photoCollectView indexPathForItemAtPoint:currentTouchPosition];
     
-    LYPhotoItem *item = [self.albumItem.photos objectAtIndex:indexPath.row];
-    
-    if (self.selectItems.count<MaxPhotoNum || item.isSelected)
+    if (indexPath)
     {
-        item.isSelected = !item.isSelected;
-        if (item.isSelected) {
-            [self.selectItems addObject:item.asset];
-        } else {
-            [self.selectItems removeObject:item.asset];
+        LYPhotoItem *item = [self.albumItem.photos objectAtIndex:indexPath.row];
+        
+        if (self.selectItems.count<MaxPhotoNum || item.isSelected)
+        {
+            item.isSelected = !item.isSelected;
+            if (item.isSelected) {
+                [self.selectItems addObject:item.asset];
+            } else {
+                [self.selectItems removeObject:item.asset];
+            }
+            
+            [self.photoCollectView reloadItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+        }
+        else
+        {
+            NSString *msg = [NSString stringWithFormat:@"最多只能上传%d张图片！",MaxPhotoNum];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"通知" message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
         }
         
-        [self.photoCollectView reloadItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+        [self refreshControlViewWithSelectNum:self.selectItems.count];
     }
-    else
-    {
-        NSString *msg = [NSString stringWithFormat:@"最多只能上传%d张图片！",MaxPhotoNum];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"通知" message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alertView show];
-    }
-    
-    [self refreshControlViewWithSelectNum:self.selectItems.count];
 }
 
 /** 发送按钮 触发事件 */

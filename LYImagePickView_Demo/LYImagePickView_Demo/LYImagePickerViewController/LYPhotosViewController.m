@@ -182,7 +182,7 @@
         self.numLabel.textColor = [UIColor grayColor];
         self.numLabel.textAlignment = NSTextAlignmentCenter;
         self.numLabel.backgroundColor = [UIColor clearColor];
-        self.numLabel.text = @"0/9";
+        self.numLabel.text = [NSString stringWithFormat:@"0/%d", MaxPhotoNum];
         [self addSubview:self.numLabel];
         
         //发送按钮

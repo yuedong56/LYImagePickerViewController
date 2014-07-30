@@ -181,6 +181,8 @@
 #pragma mark - LYPhotosVC delegate
 - (void)photosViewController:(LYPhotosViewController *)photoVC didFinishSelectAssets:(NSMutableArray *)assets
 {
+    [self.delegate imageViewControllerView:self willFinishSelectAssets:assets];
+    
     [self dismissViewControllerAnimated:YES completion:^{
         [self.delegate imageViewControllerView:self didFinishSelectAssets:assets];
     }];

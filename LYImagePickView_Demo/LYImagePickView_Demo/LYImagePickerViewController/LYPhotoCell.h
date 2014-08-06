@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 老岳. All rights reserved.
 //
 
-#define Photo_Width 70.0f
+#define Photo_Width 78.0f
 
 #import <UIKit/UIKit.h>
 

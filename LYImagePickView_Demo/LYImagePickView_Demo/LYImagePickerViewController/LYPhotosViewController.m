@@ -47,6 +47,8 @@
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
     [collectionViewLayout setItemSize:CGSizeMake(Photo_Width, Photo_Width)];    [collectionViewLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     collectionViewLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    collectionViewLayout.minimumInteritemSpacing = 2;
+    collectionViewLayout.minimumLineSpacing = 2;
     
     self.photoCollectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, Screen_Height-ControlView_Height-(IOS7_And_Later?0:64)) collectionViewLayout:collectionViewLayout];
     self.photoCollectView.backgroundColor = [UIColor whiteColor];
@@ -107,7 +109,7 @@
         }
         else
         {
-            NSString *msg = [NSString stringWithFormat:@"最多只能上传%d张图片！",MaxPhotoNum];
+            NSString *msg = [NSString stringWithFormat:@"最多只能上传%d张图片！", MaxPhotoNum];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"通知" message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alertView show];
         }
@@ -145,8 +147,6 @@
     
     LYPhotoItem *item = [self.albumItem.photos objectAtIndex:indexPath.row];
     UIImage *image = [[UIImage alloc] initWithCGImage:item.asset.thumbnail];
-    cell.backgroundColor = [UIColor redColor];
-    cell.photoImageButton.backgroundColor = [UIColor greenColor];
     [cell.photoImageButton setImage:image forState:UIControlStateNormal];
     [cell.photoImageButton addTarget:self action:@selector(photoButtonPress:event:) forControlEvents:UIControlEventTouchUpInside];
     

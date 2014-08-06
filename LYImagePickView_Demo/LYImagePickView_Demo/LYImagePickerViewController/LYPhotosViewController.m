@@ -41,9 +41,20 @@
     [self initControlView];
     [self reloadData];
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
+    NSNumber *preStatusBarStyle = [NSNumber numberWithInt:[[UIApplication sharedApplication] statusBarStyle]];
+    [[NSUserDefaults standardUserDefaults] setObject:preStatusBarStyle forKey:kPreStatusBarStyle];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    UIStatusBarStyle preStatusBarStyle = [[[NSUserDefaults standardUserDefaults] objectForKey:kPreStatusBarStyle] intValue];
+    [[UIApplication sharedApplication] setStatusBarStyle:preStatusBarStyle];
 }
 
 - (void)initPhotoCollectionView

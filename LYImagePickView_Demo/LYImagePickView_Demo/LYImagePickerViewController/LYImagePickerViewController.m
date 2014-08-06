@@ -55,12 +55,22 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    NSNumber *preStatusBarStyle = [NSNumber numberWithInt:[[UIApplication sharedApplication] statusBarStyle]];
+    [[NSUserDefaults standardUserDefaults] setObject:preStatusBarStyle forKey:kPreStatusBarStyle];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 
     if (self.showType==ImageShowTypeSavedPhotos && !self.albums.count)
     {
         [self reloadAlbumData];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    UIStatusBarStyle preStatusBarStyle = [[[NSUserDefaults standardUserDefaults] objectForKey:kPreStatusBarStyle] intValue];
+    [[UIApplication sharedApplication] setStatusBarStyle:preStatusBarStyle];
 }
 
 /** 获取相簿信息，并刷新列表
@@ -160,7 +170,7 @@
     LYAlbumItem *item = [self.albums objectAtIndex:indexPath.row];
     cell.imageView.image = item.posterImage;
     cell.textLabel.text = item.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"共 (%d) 张",item.photos.count];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"共 (%lu) 张",(unsigned long)item.photos.count];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
@@ -184,7 +194,6 @@
 - (void)photosViewController:(LYPhotosViewController *)photoVC didFinishSelectAssets:(NSMutableArray *)assets
 {
     [self.delegate imageViewControllerView:self willFinishSelectAssets:assets];
-    
     [self dismissViewControllerAnimated:YES completion:^{
         [self.delegate imageViewControllerView:self didFinishSelectAssets:assets];
     }];

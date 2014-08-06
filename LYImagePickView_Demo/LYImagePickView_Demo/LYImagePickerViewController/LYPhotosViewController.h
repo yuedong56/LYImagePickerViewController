@@ -12,6 +12,8 @@
 #import "LYAlbumItem.h"
 #import "LYPhotoItem.h"
 
+#define kPreStatusBarStyle @"kPreStatusBarStyle"
+
 @protocol PhotosVCDelegate;
 @class ControlView;
 @interface LYPhotosViewController : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource>

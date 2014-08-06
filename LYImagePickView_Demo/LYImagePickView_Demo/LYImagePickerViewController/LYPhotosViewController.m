@@ -41,6 +41,10 @@
     [self initControlView];
     [self reloadData];
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
 
 - (void)initPhotoCollectionView
 {

@@ -55,6 +55,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+
     if (self.showType==ImageShowTypeSavedPhotos && !self.albums.count)
     {
         [self reloadAlbumData];

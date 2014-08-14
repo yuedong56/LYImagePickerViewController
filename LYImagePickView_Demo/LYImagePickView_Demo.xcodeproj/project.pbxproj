@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30914141199C61DC003C1B4B /* laoyue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30914140199C61DC003C1B4B /* laoyue.jpg */; };
 		30BD27541938845500D85E6D /* UIViewController+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BD27451938845500D85E6D /* UIViewController+Rotate.m */; };
 		30BD27551938845500D85E6D /* backButton_h.png in Resources */ = {isa = PBXBuildFile; fileRef = 30BD27471938845500D85E6D /* backButton_h.png */; };
 		30BD27561938845500D85E6D /* backButton_n.png in Resources */ = {isa = PBXBuildFile; fileRef = 30BD27481938845500D85E6D /* backButton_n.png */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		30914140199C61DC003C1B4B /* laoyue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = laoyue.jpg; sourceTree = "<group>"; };
 		30BD27441938845500D85E6D /* UIViewController+Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Rotate.h"; sourceTree = "<group>"; };
 		30BD27451938845500D85E6D /* UIViewController+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Rotate.m"; sourceTree = "<group>"; };
 		30BD27471938845500D85E6D /* backButton_h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton_h.png; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				30C4CA901936DDD90080FAEE /* InfoPlist.strings */,
 				30C4CA931936DDD90080FAEE /* main.m */,
 				30C4CA951936DDD90080FAEE /* LYImagePickView_Demo-Prefix.pch */,
+				30914140199C61DC003C1B4B /* laoyue.jpg */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				30BD27571938845500D85E6D /* edt_alarm_selected.png in Resources */,
 				30BD27551938845500D85E6D /* backButton_h.png in Resources */,
 				30C4CA9A1936DDD90080FAEE /* Images.xcassets in Resources */,
+				30914141199C61DC003C1B4B /* laoyue.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

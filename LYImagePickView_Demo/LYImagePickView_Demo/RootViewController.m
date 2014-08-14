@@ -15,19 +15,17 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor lightGrayColor];
-    
-    UIButton *photoLibrary = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    photoLibrary.frame = CGRectMake(0, 0, 100, 40);
-    photoLibrary.center = CGPointMake(160, 240);
-    [photoLibrary setTitle:@"相册" forState:UIControlStateNormal];
-    photoLibrary.titleLabel.font = [UIFont systemFontOfSize:20];
-    [self.view addSubview:photoLibrary];
-    [photoLibrary addTarget:self action:@selector(photoLibraryButton:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button.frame = CGRectMake(0, 0, 120, 50);
+    button.center = self.view.center;
+    [button setTitle:@"Open Album" forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:20];
+    [self.view addSubview:button];
+    [button addTarget:self action:@selector(button:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 /** 打开相册 */
-- (void)photoLibraryButton:(UIButton *)button
+- (void)button:(UIButton *)button
 {
     LYImagePickerViewController *vc = [[LYImagePickerViewController alloc] initWithShowType:ImageShowTypeSavedPhotos
                                                                                      maxNum:9];
@@ -36,9 +34,16 @@
     [self presentViewController:nav animated:YES completion:NULL];
 }
 
+#pragma mark - LYImagePickerViewController delegate
 - (void)imageViewControllerView:(LYImagePickerViewController *)imagePickerVC didFinishSelectAssets:(NSMutableArray *)assets
 {
-    NSLog(@"items -- %@",assets);
+    NSLog(@"%s, items -- %@",__FUNCTION__, assets);
+}
+
+- (void)imageViewControllerView:(LYImagePickerViewController *)imagePickerVC willFinishSelectAssets:(NSMutableArray *)assets
+{
+    NSLog(@"%s, items -- %@",__FUNCTION__, assets);
 }
 
 @end
+

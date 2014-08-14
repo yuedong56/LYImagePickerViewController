@@ -17,6 +17,12 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
+    [application setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+    
+    UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake(110, 130, 100, 100)];
+    logo.image = [UIImage imageNamed:@"laoyue.jpg"];
+    [self.window addSubview:logo];
+    
     self.window.rootViewController = [RootViewController new];
     
     return YES;

@@ -17,13 +17,14 @@
 
 @implementation LYPhotosViewController
 
-- (instancetype)initWithItem:(LYAlbumItem *)item
+- (instancetype)initWithItem:(LYAlbumItem *)item maxNum:(int)maxNum
 {
     self = [super init];
     if (self) {
         self.albumItem = item;
         self.title = item.name;
         self.selectItems = [NSMutableArray arrayWithCapacity:0];
+        maxPhotoNumber = maxNum;
     }
     return self;
 }
@@ -55,6 +56,10 @@
 {
     UIStatusBarStyle preStatusBarStyle = [[[NSUserDefaults standardUserDefaults] objectForKey:kPreStatusBarStyle] intValue];
     [[UIApplication sharedApplication] setStatusBarStyle:preStatusBarStyle];
+    
+    for (LYPhotoItem *item in self.albumItem.photos) {
+        item.isSelected = NO;
+    }
 }
 
 - (void)initPhotoCollectionView
@@ -77,7 +82,7 @@
 
 - (void)initControlView
 {
-    self.controlView = [[ControlView alloc] initWithFrame:CGRectMake(0, self.photoCollectView.frame.size.height, Screen_Width, ControlView_Height)];
+    self.controlView = [[ControlView alloc] initWithFrame:CGRectMake(0, self.photoCollectView.frame.size.height, Screen_Width, ControlView_Height) maxNum:maxPhotoNumber];
     [self.controlView.doneButton addTarget:self action:@selector(doneButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.controlView];
 }
@@ -111,7 +116,7 @@
     {
         LYPhotoItem *item = [self.albumItem.photos objectAtIndex:indexPath.row];
         
-        if (self.selectItems.count<MaxPhotoNum || item.isSelected)
+        if (self.selectItems.count<maxPhotoNumber || item.isSelected)
         {
             item.isSelected = !item.isSelected;
             if (item.isSelected) {
@@ -124,7 +129,7 @@
         }
         else
         {
-            NSString *msg = [NSString stringWithFormat:@"最多只能上传%d张图片！", MaxPhotoNum];
+            NSString *msg = [NSString stringWithFormat:@"最多只能上传%d张图片！", maxPhotoNumber];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"通知" message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alertView show];
         }
@@ -142,7 +147,7 @@
 /** 刷新控制视图 */
 - (void)refreshControlViewWithSelectNum:(NSInteger)selectNum
 {
-    self.controlView.numLabel.text = [NSString stringWithFormat:@"%d/%d",selectNum,MaxPhotoNum];
+    self.controlView.numLabel.text = [NSString stringWithFormat:@"%d/%d", selectNum, maxPhotoNumber];
     self.controlView.doneButton.enabled = selectNum;
 }
 
@@ -185,7 +190,7 @@
 
 @implementation ControlView
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame maxNum:(int)maxNum
 {
     self = [super initWithFrame:frame];
     if (self)
@@ -197,7 +202,7 @@
         self.numLabel.textColor = [UIColor grayColor];
         self.numLabel.textAlignment = NSTextAlignmentCenter;
         self.numLabel.backgroundColor = [UIColor clearColor];
-        self.numLabel.text = [NSString stringWithFormat:@"0/%d", MaxPhotoNum];
+        self.numLabel.text = [NSString stringWithFormat:@"0/%d", maxNum];
         [self addSubview:self.numLabel];
         
         //发送按钮

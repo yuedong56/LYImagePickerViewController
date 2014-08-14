@@ -29,7 +29,8 @@
 /** 打开相册 */
 - (void)photoLibraryButton:(UIButton *)button
 {
-    LYImagePickerViewController *vc = [[LYImagePickerViewController alloc] initWithShowType:ImageShowTypeSavedPhotos];
+    LYImagePickerViewController *vc = [[LYImagePickerViewController alloc] initWithShowType:ImageShowTypeSavedPhotos
+                                                                                     maxNum:9];
     vc.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:NULL];

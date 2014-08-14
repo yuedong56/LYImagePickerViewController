@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
-#define MaxPhotoNum 9 //最多上传照片数量
 
 #pragma mark - 照片模型
 @interface LYPhotoItem : NSObject

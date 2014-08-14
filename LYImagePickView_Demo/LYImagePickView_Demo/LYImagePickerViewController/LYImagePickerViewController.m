@@ -19,7 +19,7 @@
 
 @implementation LYImagePickerViewController
 
-- (instancetype)initWithShowType:(ImageShowType)showType
+- (instancetype)initWithShowType:(ImageShowType)showType maxNum:(int)maxNum
 {
     self = [super init];
     if (self)
@@ -27,6 +27,7 @@
         self.albums = [NSMutableArray arrayWithCapacity:0];
         self.showType = showType;
         self.title = @"相簿";
+        maxPhotoNumber = maxNum;
     }
     return self;
 }
@@ -46,7 +47,7 @@
     }
     else if (self.showType == ImageShowTypeSavedPhotos)
     {
-        self.savePhotosVC = [[LYPhotosViewController alloc] init];
+        self.savePhotosVC = [[LYPhotosViewController alloc] initWithItem:nil maxNum:maxPhotoNumber];
         self.savePhotosVC.delegate = self;
         [self.navigationController pushViewController:self.savePhotosVC animated:YES];
         [self reloadSavedPhotosData];
@@ -134,7 +135,7 @@
               }
               if (index == group.numberOfAssets-1) {
                   *stop = YES;
-                  self.savePhotosVC = [self.savePhotosVC initWithItem:albumItem];
+                  self.savePhotosVC = [self.savePhotosVC initWithItem:albumItem maxNum:maxPhotoNumber];
                   [self.savePhotosVC reloadData];
               }
           }];
@@ -185,7 +186,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     LYAlbumItem *item = [self.albums objectAtIndex:indexPath.row];
-    LYPhotosViewController *vc = [[LYPhotosViewController alloc] initWithItem:item];
+    LYPhotosViewController *vc = [[LYPhotosViewController alloc] initWithItem:item maxNum:maxPhotoNumber];
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }

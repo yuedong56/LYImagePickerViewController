@@ -17,7 +17,9 @@
 @protocol PhotosVCDelegate;
 @class ControlView;
 @interface LYPhotosViewController : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource>
-
+{
+    int maxPhotoNumber;   //最大选择照片数目
+}
 @property (nonatomic, strong) LYAlbumItem *albumItem;
 @property (nonatomic, strong) UICollectionView *photoCollectView;
 @property (nonatomic, strong) ControlView *controlView;
@@ -27,7 +29,7 @@
 /** 存储选中的图片 */
 @property (nonatomic, strong) NSMutableArray *selectItems;
 
-- (id)initWithItem:(LYAlbumItem *)item;
+- (id)initWithItem:(LYAlbumItem *)item maxNum:(int)maxNum;
 
 - (void)reloadData;
 
@@ -40,6 +42,8 @@
 
 @property (nonatomic, strong) UILabel *numLabel;
 @property (nonatomic, strong) UIButton *doneButton;
+
+- (instancetype)initWithFrame:(CGRect)frame maxNum:(int)maxNum;
 
 @end
 

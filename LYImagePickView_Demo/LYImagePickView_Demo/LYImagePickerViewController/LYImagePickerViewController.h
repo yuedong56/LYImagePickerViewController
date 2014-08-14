@@ -23,6 +23,9 @@ typedef enum {
 
 @protocol LYImagePickerViewControllerDelegate;
 @interface LYImagePickerViewController : UITableViewController<PhotosVCDelegate>
+{
+    int maxPhotoNumber;   //最大选择照片数目
+}
 
 /**
  * @brief 弹出时显示的页面
@@ -35,7 +38,7 @@ typedef enum {
 /**
  * @brief 参数showType为ImageShowTypeAlbum时，显示相簿列表界面，ImageShowTypeDetail时，显示相机胶卷界面
 */
-- (id)initWithShowType:(ImageShowType)showType;
+- (id)initWithShowType:(ImageShowType)showType maxNum:(int)maxNum;
 
 @end
 

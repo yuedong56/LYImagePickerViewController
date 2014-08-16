@@ -35,14 +35,20 @@
 }
 
 #pragma mark - LYImagePickerViewController delegate
-- (void)imageViewControllerView:(LYImagePickerViewController *)imagePickerVC didFinishSelectAssets:(NSMutableArray *)assets
+- (void)imageViewController:(LYImagePickerViewController *)imagePickerVC didFinishSelectAssets:(NSMutableArray *)assets
 {
     NSLog(@"%s, items -- %@",__FUNCTION__, assets);
+
+    [imagePickerVC dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
-- (void)imageViewControllerView:(LYImagePickerViewController *)imagePickerVC willFinishSelectAssets:(NSMutableArray *)assets
+- (void)imageViewControllerDidCancel:(LYImagePickerViewController *)imagePickerVC
 {
-    NSLog(@"%s, items -- %@",__FUNCTION__, assets);
+    [imagePickerVC dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 @end

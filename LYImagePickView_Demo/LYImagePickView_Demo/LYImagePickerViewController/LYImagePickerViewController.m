@@ -147,7 +147,9 @@
 #pragma mark - button Events
 - (void)cancelButtonClick:(id)object
 {
-    [self dismissViewControllerAnimated:YES completion:NULL];
+    if ([self.delegate respondsToSelector:@selector(imageViewControllerDidCancel:)]) {
+        [self.delegate imageViewControllerDidCancel:self];
+    }
 }
 
 #pragma uitableView datasource & delegate
@@ -194,10 +196,17 @@
 #pragma mark - LYPhotosVC delegate
 - (void)photosViewController:(LYPhotosViewController *)photoVC didFinishSelectAssets:(NSMutableArray *)assets
 {
-    [self.delegate imageViewControllerView:self willFinishSelectAssets:assets];
-    [self dismissViewControllerAnimated:YES completion:^{
-        [self.delegate imageViewControllerView:self didFinishSelectAssets:assets];
-    }];
+    if ([self.delegate respondsToSelector:@selector(imageViewController:didFinishSelectAssets:)])
+    {
+        [self.delegate imageViewController:self didFinishSelectAssets:assets];
+    }
+}
+
+- (void)photosViewControllerDidCancel:(LYPhotosViewController *)photoVC
+{
+    if ([self.delegate respondsToSelector:@selector(imageViewControllerDidCancel:)]) {
+        [self.delegate imageViewControllerDidCancel:self];
+    }
 }
 
 /**

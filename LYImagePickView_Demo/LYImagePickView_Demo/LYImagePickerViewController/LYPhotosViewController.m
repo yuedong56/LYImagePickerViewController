@@ -100,7 +100,9 @@
 #pragma mark - button Events
 - (void)cancelButtonClick:(id)object
 {
-    [self dismissViewControllerAnimated:YES completion:NULL];
+    if ([self.delegate respondsToSelector:@selector(photosViewControllerDidCancel:)]) {
+        [self.delegate photosViewControllerDidCancel:self];
+    }
 }
 
 #pragma mark - Button Events

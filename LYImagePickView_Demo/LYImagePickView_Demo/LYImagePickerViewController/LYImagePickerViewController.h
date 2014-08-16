@@ -45,14 +45,17 @@ typedef enum {
 
 @protocol LYImagePickerViewControllerDelegate <NSObject>
 
-/**
- * @brief 点击发送按钮（未dismiss相册页面就执行，即viewWillAppear执行前运行此代理方法）
- */
-- (void)imageViewControllerView:(LYImagePickerViewController *)imagePickerVC willFinishSelectAssets:(NSMutableArray *)assets;
 
 /**
  * @brief 点击发送按钮（dismiss相册页面后才执行，即viewWillAppear执行后运行此代理方法）
  */
-- (void)imageViewControllerView:(LYImagePickerViewController *)imagePickerVC didFinishSelectAssets:(NSMutableArray *)assets;
+- (void)imageViewController:(LYImagePickerViewController *)imagePickerVC didFinishSelectAssets:(NSMutableArray *)assets;
+
+/**
+ * @biref 点击取消按钮
+ */
+- (void)imageViewControllerDidCancel:(LYImagePickerViewController *)imagePickerVC;
 
 @end
+
+

@@ -54,4 +54,8 @@
 /** 点击发送按钮 */
 - (void)photosViewController:(LYPhotosViewController *)photoVC didFinishSelectAssets:(NSMutableArray *)assets;
 
+/** 点击取消按钮 */
+- (void)photosViewControllerDidCancel:(LYPhotosViewController *)photoVC;
+
 @end
+

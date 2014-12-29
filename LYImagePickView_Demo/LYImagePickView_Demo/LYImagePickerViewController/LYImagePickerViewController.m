@@ -49,7 +49,7 @@
     {
         self.savePhotosVC = [[LYPhotosViewController alloc] initWithItem:nil maxNum:maxPhotoNumber];
         self.savePhotosVC.delegate = self;
-        [self.navigationController pushViewController:self.savePhotosVC animated:YES];
+        [self.navigationController pushViewController:self.savePhotosVC animated:NO];
         [self reloadSavedPhotosData];
     }
 }
